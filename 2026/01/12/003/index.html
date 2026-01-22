@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <meta charset="UTF-8">
+  <meta 
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta 
+    http-equiv="X-UA-Compatible" 
+    content="ie=edge">
+  <meta 
+    name="theme-color" 
+    content="#fff" 
+    id="theme-color">
+  <meta 
+    name="description" 
+    content="天空是蔚蓝色，窗外有千纸鹤">
+  <link 
+    rel="icon" 
+    href="https://thirdqq.qlogo.cn/ek_qqapp/AQVnr8QREa6INibZC4Expz3kqqh3QC0n23gujKR4rG0dfqPUCibKFrb72PLvaGQxyBZBOTIqgt/0">
+  <title>贪吃蛇小游戏</title>
+  
+    
+      <meta 
+        property="og:title" 
+        content="贪吃蛇小游戏">
+    
+    
+      <meta 
+        property="og:url" 
+        content="http://example.com/2026/01/12/003/index.html">
+    
+    
+      <meta 
+        property="og:img" 
+        content="https://thirdqq.qlogo.cn/ek_qqapp/AQVnr8QREa6INibZC4Expz3kqqh3QC0n23gujKR4rG0dfqPUCibKFrb72PLvaGQxyBZBOTIqgt/0">
+    
+    
+      <meta 
+        property="og:img" 
+        content="本篇只简单介绍一下怎么制作一个贪吃蛇小游戏，完全使用AI开发的">
+    
+    
+      <meta 
+        property="og:type" 
+        content="article">
+      <meta 
+        property="og:article:published_time" 
+        content="2026-01-12">
+      <meta 
+        property="og:article:modified_time" 
+        content="2026-01-12">
+      <meta 
+        property="og:article:author" 
+        content="xww">
+      
+        
+          <meta 
+            property="og:article:tag" 
+            content="AI">
+        
+      
+    
+  
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  <link rel="preload" href="/css/main.css" as="style" >
+  
+  <link rel="modulepreload" href="//instant.page/5.1.0">
+  
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_i1kgafibvw.css">
+  
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+  
+  
+  
+    <link rel="stylesheet" href="/js/lib/lightbox/baguetteBox.min.css">
+  
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+    function loadCSS(href, data, attr) {
+      var sheet = document.createElement('link');
+      sheet.ref = 'stylesheet';
+      sheet.href = href;
+      sheet.dataset[data] = attr;
+      document.head.appendChild(sheet);
+    }
+    function changeCSS(cssFile, data, attr) {
+      var oldlink = document.querySelector(data);
+      var newlink = document.createElement("link");
+      newlink.setAttribute("rel", "stylesheet");
+      newlink.setAttribute("href", cssFile);
+      newlink.dataset.prism = attr;
+      document.head.replaceChild(newlink, oldlink);
+    }
+  </script>
+  
+    
+  
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+  </script>
+  
+    <script>
+      var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+        document.getElementById('theme-color').dataset.mode = setting;
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+        document.getElementById('theme-color').dataset.mode = getCssMediaQuery();
+      }
+    };
+    setDarkmode();
+    </script>
+  
+  
+  
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.js" as="script">
+    <link rel="preload" href="/js/lib/lightbox/baguetteBox.min.css" as="style" >
+  
+  
+    <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <div class="wrapper">
+       
+      <nav class="navbar">
+  <div class="navbar-logo">
+    <a class="navbar-logo-main" href="/">
+      
+        <img 
+          class="navbar-logo-img"
+          width="32"
+          height="32"
+          src="https://thirdqq.qlogo.cn/ek_qqapp/AQVnr8QREa6INibZC4Expz3kqqh3QC0n23gujKR4rG0dfqPUCibKFrb72PLvaGQxyBZBOTIqgt/0" 
+          alt="blog logo">
+      
+      <span class="navbar-logo-dsc">xww的个人博客</span>
+      </a>
+  </div>
+  <div class="navbar-menu">
+    
+      <a 
+        href="/" 
+        class="navbar-menu-item">
+        
+          首页
+        
+      </a>
+    
+      <a 
+        href="/archives" 
+        class="navbar-menu-item">
+        
+          归档
+        
+      </a>
+    
+      <a 
+        href="/tags" 
+        class="navbar-menu-item">
+        
+          标签
+        
+      </a>
+    
+      <a 
+        href="/categories" 
+        class="navbar-menu-item">
+        
+          分类
+        
+      </a>
+    
+      <a 
+        href="/about" 
+        class="navbar-menu-item">
+        
+          关于
+        
+      </a>
+    
+      <a 
+        href="/links" 
+        class="navbar-menu-item">
+        
+          友链
+        
+      </a>
+    
+    <button 
+      class="navbar-menu-item darknavbar navbar-menu-btn" 
+      aria-label="Toggle dark mode"
+      id="dark">
+      <i class="iconfont icon-weather"></i>
+    </button>
+    <button 
+      class="navbar-menu-item searchnavbar navbar-menu-btn" 
+      aria-label="Toggle search"
+      id="search">
+      <!-- <i 
+        class="iconfont icon-search" 
+        style="font-size: 1.2rem; font-weight: 400;">
+      </i> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+        class="iconify iconify--ion" width="28" height="28" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M256 80a176 176 0 1 0 176 176A176 176 0 0 0 256 80Z"></path>
+        <path fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="28"
+          d="M232 160a72 72 0 1 0 72 72a72 72 0 0 0-72-72Z"></path>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="28"
+          d="M283.64 283.64L336 336"></path>
+      </svg>
+    </button>
+  </div>
+</nav> 
+      
+      <div 
+        id="local-search" 
+        style="display: none">
+        <input
+          class="navbar-menu-item"
+          id="search-input"
+          placeholder="请输入搜索内容..." />
+        <div id="search-content"></div>
+      </div>
+      
+      <div class="section-wrap">
+        <div class="container">
+          <div class="columns">
+            <aside class="left-column">
+              
+              <div class="card card-author">
+                
+  <img 
+    src="https://thirdqq.qlogo.cn/ek_qqapp/AQVnr8QREa6INibZC4Expz3kqqh3QC0n23gujKR4rG0dfqPUCibKFrb72PLvaGQxyBZBOTIqgt/0" 
+    class="author-img"
+    width="88"
+    height="88"
+    alt="author avatar">
+
+<p class="author-name">xww</p>
+<p class="author-description">天空是蔚蓝色</p>
+<div class="author-message">
+  <a 
+    class="author-posts-count" 
+    href="/archives">
+    <span>3</span>
+    <span>文章</span>
+  </a>
+  <a 
+    class="author-categories-count" 
+    href="/categories">
+    <span>1</span>
+    <span>分类</span>
+  </a>
+  <a 
+    class="author-tags-count" 
+    href="/tags">
+    <span>2</span>
+    <span>标签</span>
+  </a>
+</div>
+
+  <div class="author-card-society">
+    
+      <div class="author-card-society-icon">
+        <a target="_blank" rel="noopener" href="https://github.com/shuangxunian">
+          <i class="iconfont icon-github society-icon"></i>
+        </a>
+      </div>
+    
+  </div>
+
+              </div>
+               <div class="sticky-tablet">
+  
+  
+    <article class="display-when-two-columns spacer">
+      <div class="card card-content toc-card">
+        <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%8A%E7%BA%BF%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5"><span class="toc-text">贪吃蛇小游戏开发总结：从零到上线的技术实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%BB%E8%A6%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">开发过程中遇到的主要问题及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%91%87%E6%9D%86%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">1. 摇杆控制系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Canvas-%E7%BB%98%E5%88%B6%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="toc-text">2. Canvas 绘制显示问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A3%9F%E7%89%A9%E7%94%9F%E6%88%90%E9%80%BB%E8%BE%91%E9%97%AE%E9%A2%98"><span class="toc-text">3. 食物生成逻辑问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-1"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%81%E8%AE%B8%E9%A3%9F%E7%89%A9%E5%87%BA%E7%8E%B0%E5%9C%A8%E8%9B%87%E8%BA%AB%E4%B8%8A"><span class="toc-text">4. 允许食物出现在蛇身上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-3"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9-1"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A9%BF%E5%A2%99%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">5. 穿墙功能的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-4"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">6. 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-5"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-5"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B"><span class="toc-text">7. 代码质量改进</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-6"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6"><span class="toc-text">解决方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E6%80%BB%E7%BB%93"><span class="toc-text">技术栈总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9"><span class="toc-text">项目亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-text">经验总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="toc-text">后续优化方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-text">项目地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol></li></ol>
+      </div>
+    </article>
+  
+  
+  <article class="card card-content categories-widget">
+    <div class="categories-card">
+  <div class="categories-header">
+    <i 
+      class="iconfont icon-fenlei" 
+      style="padding-right: 2px;">
+    </i>分类
+  </div>
+  <div class="categories-list">
+    
+      <a href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/">
+        <div class="categories-list-item">
+          技术文章
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content tags-widget">
+    <div class="tags-card">
+  <div class="tags-header">
+    <i 
+      class="iconfont icon-biaoqian" 
+      style="padding-right: 2px;">
+    </i>热门标签
+  </div>
+  <div class="tags-list">
+    
+      <a 
+        href="/tags/markdown/" 
+        title="markdown">
+        <div class="tags-list-item">markdown</div>
+      </a>
+    
+      <a 
+        href="/tags/AI/" 
+        title="AI">
+        <div class="tags-list-item">AI</div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+            <main class="main-column">
+              
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      贪吃蛇小游戏
+    </h1>
+  </header>
+  
+    <div class="post-meta post-show-meta">
+      <a href="https://github.com/xwwcyber/xwwcyber.github.io/edit/main/source/_posts/003.md" target="_blank">编辑原文</a>
+    </div>
+  
+  <div class="post-meta post-show-meta">
+    <time datetime="2026-01-12T00:00:00.000Z">
+      <i 
+        class="iconfont icon-calendar" 
+        style="margin-right: 2px;">
+      </i>
+      <span>2026-01-12</span>
+    </time>
+    
+      <span class="dot"></span>
+      
+        <a 
+          href="/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E7%AB%A0/" 
+          class="post-meta-link">
+          技术文章
+        </a>
+      
+    
+    
+      <span class="dot"></span>
+      <span>2.7k 字</span>
+    
+  </div>
+  
+    <div 
+      class="post-meta post-show-meta" 
+      style="margin-top: -10px;">
+      <div style="display: flex; align-items: center;">
+        <i 
+          class="iconfont icon-biaoqian" 
+          style="margin-right: 2px; font-size: 1.15rem;">
+        </i>
+        
+          
+          <a 
+            href="/tags/AI/" 
+            class="post-meta-link">
+            AI
+          </a>
+        
+      </div>
+    </div>
+  
+  </header>
+  <div 
+    id="section" 
+    class="post-content">
+    <h1 id="贪吃蛇小游戏开发总结：从零到上线的技术实践"><a href="#贪吃蛇小游戏开发总结：从零到上线的技术实践" class="headerlink" title="贪吃蛇小游戏开发总结：从零到上线的技术实践"></a>贪吃蛇小游戏开发总结：从零到上线的技术实践</h1><h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>这是一个基于 uni-app 框架开发的贪吃蛇小游戏，采用 Vue3 + Canvas 2D 技术栈，支持虚拟摇杆控制、穿墙功能、特殊食物系统等特色功能。项目已成功部署到 GitHub：<a target="_blank" rel="noopener" href="https://github.com/xwwcyber/snake_game">xwwcyber&#x2F;snake_game</a></p>
+<hr>
+<h2 id="开发过程中遇到的主要问题及解决方案"><a href="#开发过程中遇到的主要问题及解决方案" class="headerlink" title="开发过程中遇到的主要问题及解决方案"></a>开发过程中遇到的主要问题及解决方案</h2><h3 id="1-摇杆控制系统的实现"><a href="#1-摇杆控制系统的实现" class="headerlink" title="1. 摇杆控制系统的实现"></a>1. 摇杆控制系统的实现</h3><h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>最初使用传统的方向按键控制，用户体验不够流畅，需要改为虚拟摇杆控制，并且要求用户松开摇杆时蛇保持当前方向继续移动。</p>
+<h4 id="技术难点"><a href="#技术难点" class="headerlink" title="技术难点"></a>技术难点</h4><ul>
+<li>触摸事件的精确捕获和处理</li>
+<li>摇杆位置的计算和限制</li>
+<li>方向判断的准确性</li>
+</ul>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>实现触摸事件监听</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">onJoystickStart</span>(<span class="hljs-params">e</span>) &#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">gameRunning</span>) <span class="hljs-keyword">return</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">isJoystickActive</span> = <span class="hljs-literal">true</span>;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">cacheJoystickPosition</span>();<br>  &#125;<br>&#125;<br><br><span class="hljs-title function_">onJoystickMove</span>(<span class="hljs-params">e</span>) &#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">gameRunning</span> || !<span class="hljs-variable language_">this</span>.<span class="hljs-property">isJoystickActive</span> || !<span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>) <span class="hljs-keyword">return</span>;<br>  <br>  <span class="hljs-keyword">const</span> touch = e.<span class="hljs-property">touches</span>[<span class="hljs-number">0</span>];<br>  <span class="hljs-keyword">const</span> centerX = <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>.<span class="hljs-property">centerX</span>;<br>  <span class="hljs-keyword">const</span> centerY = <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>.<span class="hljs-property">centerY</span>;<br>  <br>  <span class="hljs-keyword">let</span> deltaX = touch.<span class="hljs-property">clientX</span> - centerX;<br>  <span class="hljs-keyword">let</span> deltaY = touch.<span class="hljs-property">clientY</span> - centerY;<br>  <br>  <span class="hljs-comment">// 限制最大移动距离</span><br>  <span class="hljs-keyword">const</span> distance = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(deltaX * deltaX + deltaY * deltaY);<br>  <span class="hljs-keyword">const</span> maxDistancePx = <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickMaxDistance</span> / <span class="hljs-number">2</span>;<br>  <br>  <span class="hljs-keyword">if</span> (distance &gt; maxDistancePx) &#123;<br>    deltaX = (deltaX / distance) * maxDistancePx;<br>    deltaY = (deltaY / distance) * maxDistancePx;<br>  &#125;<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickX</span> = deltaX * <span class="hljs-number">2</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickY</span> = deltaY * <span class="hljs-number">2</span>;<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">updateSnakeDirection</span>(deltaX, deltaY);<br>&#125;<br><br><span class="hljs-title function_">onJoystickEnd</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">isJoystickActive</span> = <span class="hljs-literal">false</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickX</span> = <span class="hljs-number">0</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickY</span> = <span class="hljs-number">0</span>;<br>  <span class="hljs-comment">// 关键：不重置蛇的方向，保持当前方向</span><br>&#125;<br></code></pre>
+
+<p><strong>方向判断优化</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">updateSnakeDirection</span>(<span class="hljs-params">deltaX, deltaY</span>) &#123;<br>  <span class="hljs-keyword">const</span> threshold = <span class="hljs-number">5</span>; <span class="hljs-comment">// 阈值，避免微小移动导致方向变化</span><br>  <br>  <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(deltaX) &lt; threshold &amp;&amp; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(deltaY) &lt; threshold) &#123;<br>    <span class="hljs-keyword">return</span>;<br>  &#125;<br>  <br>  <span class="hljs-comment">// 判断主要方向</span><br>  <span class="hljs-keyword">if</span> (<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(deltaX) &gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">abs</span>(deltaY)) &#123;<br>    <span class="hljs-keyword">if</span> (deltaX &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> !== -<span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> = <span class="hljs-number">1</span>;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> = <span class="hljs-number">0</span>;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (deltaX &lt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> !== <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> = -<span class="hljs-number">1</span>;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> = <span class="hljs-number">0</span>;<br>    &#125;<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">if</span> (deltaY &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> !== -<span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> = <span class="hljs-number">0</span>;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> = <span class="hljs-number">1</span>;<br>    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (deltaY &lt; <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> !== <span class="hljs-number">1</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> = <span class="hljs-number">0</span>;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> = -<span class="hljs-number">1</span>;<br>    &#125;<br>  &#125;<br>&#125;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>使用阈值避免微小移动导致的误操作</li>
+<li>防止蛇直接反向移动（如向右时不能直接向左）</li>
+<li>松开摇杆时不重置方向，保持当前移动方向</li>
+</ul>
+<hr>
+<h3 id="2-Canvas-绘制显示问题"><a href="#2-Canvas-绘制显示问题" class="headerlink" title="2. Canvas 绘制显示问题"></a>2. Canvas 绘制显示问题</h3><h4 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h4><p>游戏运行时，蛇的身体和食物在 Canvas 上不可见，只能看到背景色。</p>
+<h4 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h4><ol>
+<li>Canvas 初始化时机不当，在 DOM 未完全渲染时就尝试绘制</li>
+<li>像素比例（rpx 到 px）转换不正确</li>
+<li>绘制后没有调用 <code>ctx.draw()</code> 方法</li>
+</ol>
+<h4 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>调整 Canvas 初始化时机</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">onReady</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 在 onReady 中初始化，确保 DOM 已经渲染完成</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">initGame</span>();<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">loadHighScore</span>();<br>&#125;<br><br><span class="hljs-title function_">initGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span> = uni.<span class="hljs-title function_">createCanvasContext</span>(<span class="hljs-string">&#x27;gameCanvas&#x27;</span>, <span class="hljs-variable language_">this</span>);<br>  <br>  <span class="hljs-comment">// 缓存 tile 大小计算</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span> / <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>;<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateFood</span>();<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">cacheJoystickPosition</span>();<br>  <br>  <span class="hljs-comment">// 延迟绘制，确保 canvas 初始化完成</span><br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">drawGame</span>();<br>  &#125;, <span class="hljs-number">100</span>);<br>&#125;<br></code></pre>
+
+<p><strong>正确处理像素比例</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">canvasSize</span>: <span class="hljs-number">400</span>,    <span class="hljs-comment">// rpx 单位（用于样式）</span><br>    <span class="hljs-attr">canvasSizePx</span>: <span class="hljs-number">200</span>, <span class="hljs-comment">// px 单位（用于绘制，400rpx ≈ 200px）</span><br>    <span class="hljs-attr">tileCount</span>: <span class="hljs-number">20</span>,<br>    <span class="hljs-attr">tileSize</span>: <span class="hljs-number">0</span>        <span class="hljs-comment">// 缓存计算值</span><br>  &#125;<br>&#125;<br><br><span class="hljs-title function_">drawGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 清空画布 - 使用 px 单位</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-property">fillStyle</span> = <span class="hljs-string">&#x27;#2c3e50&#x27;</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">fillRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span>);<br>  <br>  <span class="hljs-comment">// 绘制蛇</span><br>  <span class="hljs-keyword">const</span> size = <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span> - <span class="hljs-number">1</span>;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">segment, index</span>) =&gt;</span> &#123;<br>    <span class="hljs-keyword">const</span> x = segment.<span class="hljs-property">x</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span>;<br>    <span class="hljs-keyword">const</span> y = segment.<span class="hljs-property">y</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span>;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">fillRect</span>(x, y, size, size);<br>  &#125;);<br>  <br>  <span class="hljs-comment">// 重要：调用 draw() 方法将绘制内容显示到 canvas</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">draw</span>();<br>&#125;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>使用 <code>onReady</code> 生命周期钩子确保 DOM 渲染完成</li>
+<li>区分 rpx（样式）和 px（绘制）单位</li>
+<li>缓存计算结果避免重复计算</li>
+<li>必须调用 <code>ctx.draw()</code> 才能显示绘制内容</li>
+</ul>
+<hr>
+<h3 id="3-食物生成逻辑问题"><a href="#3-食物生成逻辑问题" class="headerlink" title="3. 食物生成逻辑问题"></a>3. 食物生成逻辑问题</h3><h4 id="问题描述-2"><a href="#问题描述-2" class="headerlink" title="问题描述"></a>问题描述</h4><p>蛇吃掉一个食物后，没有新的食物出现，导致游戏无法继续。</p>
+<h4 id="原因分析-1"><a href="#原因分析-1" class="headerlink" title="原因分析"></a>原因分析</h4><ol>
+<li>食物生成逻辑过于复杂，包含碰撞检测</li>
+<li>生成失败时没有重试机制</li>
+<li>代码逻辑与注释不一致</li>
+</ol>
+<h4 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>简化食物生成逻辑</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">generateFood</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 简单随机生成，允许出现在蛇身上</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>);<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>);<br>  <br>  <span class="hljs-comment">// 边界检查，确保食物在有效范围内</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">0</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>));<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">0</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>));<br>  <br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;新食物生成成功:&#x27;</span>, &#123; <span class="hljs-attr">x</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span>, <span class="hljs-attr">y</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> &#125;);<br>&#125;<br></code></pre>
+
+<p><strong>确保食物生成调用</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">moveSnake</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// ... 其他逻辑</span><br>  <br>  <span class="hljs-comment">// 检查吃到食物</span><br>  <span class="hljs-keyword">if</span> (head.<span class="hljs-property">x</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> &amp;&amp; head.<span class="hljs-property">y</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span>) &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">score</span> += <span class="hljs-number">10</span>;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;吃到食物！当前分数:&#x27;</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">score</span>);<br>    <span class="hljs-comment">// 重要：生成新食物</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">generateFood</span>();<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-title function_">pop</span>();<br>  &#125;<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">drawGame</span>();<br>&#125;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>简化生成逻辑，移除不必要的碰撞检测</li>
+<li>添加边界检查确保食物在有效范围内</li>
+<li>添加日志便于调试</li>
+<li>确保每次吃掉食物后都调用生成方法</li>
+</ul>
+<hr>
+<h3 id="4-允许食物出现在蛇身上"><a href="#4-允许食物出现在蛇身上" class="headerlink" title="4. 允许食物出现在蛇身上"></a>4. 允许食物出现在蛇身上</h3><h4 id="问题描述-3"><a href="#问题描述-3" class="headerlink" title="问题描述"></a>问题描述</h4><p>为了增加游戏挑战性，需要允许食物出现在蛇的身体上，并用不同颜色区分。</p>
+<h4 id="技术难点-1"><a href="#技术难点-1" class="headerlink" title="技术难点"></a>技术难点</h4><ul>
+<li>食物与蛇身重叠时的视觉区分</li>
+<li>保持游戏逻辑的一致性</li>
+</ul>
+<h4 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>食物颜色区分</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">drawGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// ... 绘制蛇</span><br>  <br>  <span class="hljs-comment">// 绘制食物 - 允许出现在蛇身上，使用特殊颜色区分</span><br>  <span class="hljs-keyword">let</span> foodColor = <span class="hljs-string">&#x27;#e74c3c&#x27;</span>; <span class="hljs-comment">// 默认红色</span><br>  <br>  <span class="hljs-comment">// 检查食物是否在蛇身上</span><br>  <span class="hljs-keyword">const</span> onSnakeBody = <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-title function_">some</span>(<span class="hljs-function"><span class="hljs-params">segment</span> =&gt;</span> <br>    segment.<span class="hljs-property">x</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> &amp;&amp; segment.<span class="hljs-property">y</span> === <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span><br>  );<br>  <br>  <span class="hljs-keyword">if</span> (onSnakeBody) &#123;<br>    foodColor = <span class="hljs-string">&#x27;#f39c12&#x27;</span>; <span class="hljs-comment">// 橙色，表示在蛇身上的食物</span><br>  &#125;<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-property">fillStyle</span> = foodColor;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">fillRect</span>(<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span>,<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span>,<br>    size,<br>    size<br>  );<br>  <br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">draw</span>();<br>&#125;<br></code></pre>
+
+<p><strong>UI 提示</strong>：</p>
+<pre class="highlight"><code class="hljs vue">&lt;view class=&quot;instructions&quot;&gt;<br>  &lt;text class=&quot;instruction-text&quot;&gt;使用摇杆控制蛇的移动方向&lt;/text&gt;<br>  &lt;text class=&quot;instruction-text&quot;&gt;食物可以出现在蛇身上，增加挑战性！&lt;/text&gt;<br>&lt;/view&gt;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>使用 <code>Array.some()</code> 方法高效检测重叠</li>
+<li>用不同颜色（红色 vs 橙色）区分食物状态</li>
+<li>在 UI 中添加提示说明</li>
+<li>保持游戏逻辑简单，不增加复杂度</li>
+</ul>
+<hr>
+<h3 id="5-穿墙功能的实现"><a href="#5-穿墙功能的实现" class="headerlink" title="5. 穿墙功能的实现"></a>5. 穿墙功能的实现</h3><h4 id="问题描述-4"><a href="#问题描述-4" class="headerlink" title="问题描述"></a>问题描述</h4><p>传统的贪吃蛇碰到墙壁就会死亡，为了增加游戏趣味性，实现穿墙功能（从一边边界出去，从对面边界出现）。</p>
+<h4 id="解决方案-4"><a href="#解决方案-4" class="headerlink" title="解决方案"></a>解决方案</h4><pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">moveSnake</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">if</span> (<span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span> === <span class="hljs-number">0</span> &amp;&amp; <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;<br>  <br>  <span class="hljs-keyword">const</span> head = &#123; <span class="hljs-attr">x</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>[<span class="hljs-number">0</span>].<span class="hljs-property">x</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">dx</span>, <span class="hljs-attr">y</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>[<span class="hljs-number">0</span>].<span class="hljs-property">y</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">dy</span> &#125;;<br>  <br>  <span class="hljs-comment">// 穿墙处理 - 从对面边界出现</span><br>  <span class="hljs-keyword">if</span> (head.<span class="hljs-property">x</span> &lt; <span class="hljs-number">0</span>) &#123;<br>    head.<span class="hljs-property">x</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>;<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (head.<span class="hljs-property">x</span> &gt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>) &#123;<br>    head.<span class="hljs-property">x</span> = <span class="hljs-number">0</span>;<br>  &#125;<br>  <br>  <span class="hljs-keyword">if</span> (head.<span class="hljs-property">y</span> &lt; <span class="hljs-number">0</span>) &#123;<br>    head.<span class="hljs-property">y</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>;<br>  &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (head.<span class="hljs-property">y</span> &gt;= <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>) &#123;<br>    head.<span class="hljs-property">y</span> = <span class="hljs-number">0</span>;<br>  &#125;<br>  <br>  <span class="hljs-comment">// 检查碰撞自己</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> segment <span class="hljs-keyword">of</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>) &#123;<br>    <span class="hljs-keyword">if</span> (head.<span class="hljs-property">x</span> === segment.<span class="hljs-property">x</span> &amp;&amp; head.<span class="hljs-property">y</span> === segment.<span class="hljs-property">y</span>) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">endGame</span>();<br>      <span class="hljs-keyword">return</span>;<br>    &#125;<br>  &#125;<br>  <br>  <span class="hljs-comment">// ... 其他逻辑</span><br>&#125;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>在碰撞检测之前处理穿墙逻辑</li>
+<li>使用边界值 <code>0</code> 和 <code>tileCount - 1</code></li>
+<li>穿墙不影响自身碰撞检测</li>
+<li>提升游戏可玩性和趣味性</li>
+</ul>
+<hr>
+<h3 id="6-性能优化"><a href="#6-性能优化" class="headerlink" title="6. 性能优化"></a>6. 性能优化</h3><h4 id="问题描述-5"><a href="#问题描述-5" class="headerlink" title="问题描述"></a>问题描述</h4><p>摇杆控制时频繁进行 DOM 查询，导致性能下降。</p>
+<h4 id="解决方案-5"><a href="#解决方案-5" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>缓存摇杆基座位置</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">joystickBaseRect</span>: <span class="hljs-literal">null</span> <span class="hljs-comment">// 缓存摇杆基座位置</span><br>  &#125;<br>&#125;,<br><br><span class="hljs-title function_">initGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// ... 其他初始化</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">cacheJoystickPosition</span>();<br>&#125;,<br><br><span class="hljs-title function_">cacheJoystickPosition</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">const</span> query = uni.<span class="hljs-title function_">createSelectorQuery</span>().<span class="hljs-title function_">in</span>(<span class="hljs-variable language_">this</span>);<br>  query.<span class="hljs-title function_">select</span>(<span class="hljs-string">&#x27;.joystick-base&#x27;</span>).<span class="hljs-title function_">boundingClientRect</span>(<span class="hljs-function"><span class="hljs-params">rect</span> =&gt;</span> &#123;<br>    <span class="hljs-keyword">if</span> (rect) &#123;<br>      <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span> = &#123;<br>        <span class="hljs-attr">centerX</span>: rect.<span class="hljs-property">left</span> + rect.<span class="hljs-property">width</span> / <span class="hljs-number">2</span>,<br>        <span class="hljs-attr">centerY</span>: rect.<span class="hljs-property">top</span> + rect.<span class="hljs-property">height</span> / <span class="hljs-number">2</span><br>      &#125;;<br>    &#125;<br>  &#125;).<span class="hljs-title function_">exec</span>();<br>&#125;,<br><br><span class="hljs-title function_">onJoystickMove</span>(<span class="hljs-params">e</span>) &#123;<br>  <span class="hljs-comment">// 使用缓存的摇杆基座位置，避免频繁 DOM 查询</span><br>  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>) <span class="hljs-keyword">return</span>;<br>  <br>  <span class="hljs-keyword">const</span> centerX = <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>.<span class="hljs-property">centerX</span>;<br>  <span class="hljs-keyword">const</span> centerY = <span class="hljs-variable language_">this</span>.<span class="hljs-property">joystickBaseRect</span>.<span class="hljs-property">centerY</span>;<br>  <span class="hljs-comment">// ... 其他逻辑</span><br>&#125;<br></code></pre>
+
+<p><strong>缓存计算值</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">data</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">return</span> &#123;<br>    <span class="hljs-attr">tileSize</span>: <span class="hljs-number">0</span> <span class="hljs-comment">// 缓存每个格子的像素大小</span><br>  &#125;<br>&#125;,<br><br><span class="hljs-title function_">initGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 缓存 tile 大小计算</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span> = <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span> / <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>;<br>  <span class="hljs-comment">// ... 其他初始化</span><br>&#125;,<br><br><span class="hljs-title function_">drawGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-comment">// 使用缓存的值，避免重复计算</span><br>  <span class="hljs-keyword">const</span> size = <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileSize</span> - <span class="hljs-number">1</span>;<br>  <span class="hljs-comment">// ... 绘制逻辑</span><br>&#125;<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>缓存 DOM 查询结果，避免重复查询</li>
+<li>缓存计算结果，减少重复计算</li>
+<li>在初始化时一次性完成缓存</li>
+<li>显著提升性能，减少卡顿</li>
+</ul>
+<hr>
+<h3 id="7-代码质量改进"><a href="#7-代码质量改进" class="headerlink" title="7. 代码质量改进"></a>7. 代码质量改进</h3><h4 id="问题描述-6"><a href="#问题描述-6" class="headerlink" title="问题描述"></a>问题描述</h4><p>代码检查时发现一些潜在问题，需要修复以提升代码质量。</p>
+<h4 id="解决方案-6"><a href="#解决方案-6" class="headerlink" title="解决方案"></a>解决方案</h4><p><strong>添加错误处理</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">drawGame</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>) <span class="hljs-keyword">return</span>;<br>  <br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-comment">// 绘制逻辑</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-property">fillStyle</span> = <span class="hljs-string">&#x27;#2c3e50&#x27;</span>;<br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">fillRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span>);<br>    <span class="hljs-comment">// ... 其他绘制</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">ctx</span>.<span class="hljs-title function_">draw</span>();<br>  &#125; <span class="hljs-keyword">catch</span> (error) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;绘制游戏失败:&#x27;</span>, error);<br>  &#125;<br>&#125;<br></code></pre>
+
+<p><strong>添加边界检查</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-title function_">generateFood</span>(<span class="hljs-params"></span>) &#123;<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>);<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>() * <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span>);<br>  <br>  <span class="hljs-comment">// 边界检查，确保食物在有效范围内</span><br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">0</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>));<br>  <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(<span class="hljs-number">0</span>, <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">min</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span> - <span class="hljs-number">1</span>));<br>&#125;<br></code></pre>
+
+<p><strong>完善日志系统</strong>：</p>
+<pre class="highlight"><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;游戏绘制完成&#x27;</span>, &#123;<br>  <span class="hljs-attr">snakeLength</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">snake</span>.<span class="hljs-property">length</span>,<br>  <span class="hljs-attr">foodPosition</span>: &#123; <span class="hljs-attr">x</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodX</span>, <span class="hljs-attr">y</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">foodY</span> &#125;,<br>  <span class="hljs-attr">foodOnSnake</span>: onSnakeBody,<br>  <span class="hljs-attr">canvasSizePx</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">canvasSizePx</span>,<br>  <span class="hljs-attr">tileCount</span>: <span class="hljs-variable language_">this</span>.<span class="hljs-property">tileCount</span><br>&#125;);<br></code></pre>
+
+<p><strong>关键点</strong>：</p>
+<ul>
+<li>使用 try-catch 保护关键操作</li>
+<li>添加边界检查防止越界</li>
+<li>完善日志系统便于调试</li>
+<li>提升代码健壮性和可维护性</li>
+</ul>
+<hr>
+<h2 id="技术栈总结"><a href="#技术栈总结" class="headerlink" title="技术栈总结"></a>技术栈总结</h2><ul>
+<li><strong>框架</strong>: uni-app (Vue3)</li>
+<li><strong>渲染</strong>: Canvas 2D API</li>
+<li><strong>存储</strong>: uni-app 本地存储 API</li>
+<li><strong>样式</strong>: rpx 响应式单位</li>
+<li><strong>版本控制</strong>: Git + GitHub</li>
+</ul>
+<hr>
+<h2 id="项目亮点"><a href="#项目亮点" class="headerlink" title="项目亮点"></a>项目亮点</h2><ol>
+<li><strong>摇杆控制系统</strong>: 流畅的虚拟摇杆，支持松开保持方向</li>
+<li><strong>穿墙功能</strong>: 增加游戏趣味性和可玩性</li>
+<li><strong>特殊食物系统</strong>: 食物可出现在蛇身上，用颜色区分</li>
+<li><strong>性能优化</strong>: 缓存机制，减少重复计算和 DOM 查询</li>
+<li><strong>完善的错误处理</strong>: try-catch 保护，边界检查</li>
+<li><strong>详细的日志系统</strong>: 便于调试和问题排查</li>
+</ol>
+<hr>
+<h2 id="经验总结"><a href="#经验总结" class="headerlink" title="经验总结"></a>经验总结</h2><ol>
+<li><strong>Canvas 渲染时序很重要</strong>: 必须在 DOM 完全渲染后才能初始化 Canvas</li>
+<li><strong>单位转换要明确</strong>: 区分 rpx（样式）和 px（绘制）单位</li>
+<li><strong>性能优化从细节做起</strong>: 缓存机制可以显著提升性能</li>
+<li><strong>用户体验至上</strong>: 摇杆控制的阈值设置、方向保持等细节都很重要</li>
+<li><strong>代码质量不容忽视</strong>: 错误处理、边界检查、日志系统都很重要</li>
+<li><strong>持续迭代改进</strong>: 从基础功能到特色功能，逐步完善</li>
+</ol>
+<hr>
+<h2 id="后续优化方向"><a href="#后续优化方向" class="headerlink" title="后续优化方向"></a>后续优化方向</h2><ul>
+<li><input disabled="" type="checkbox"> 添加音效系统</li>
+<li><input disabled="" type="checkbox"> 实现难度选择功能</li>
+<li><input disabled="" type="checkbox"> 添加排行榜功能</li>
+<li><input disabled="" type="checkbox"> 优化游戏动画效果</li>
+<li><input disabled="" type="checkbox"> 支持多平台发布（H5、小程序等）</li>
+<li><input disabled="" type="checkbox"> 添加游戏教程和帮助文档</li>
+</ul>
+<hr>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><ul>
+<li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/xwwcyber/snake_game">https://github.com/xwwcyber/snake_game</a></li>
+<li><strong>在线预览</strong>: （待添加）</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>通过这个贪吃蛇小游戏的开发，我深入学习了 uni-app 框架、Canvas 渲染、触摸事件处理等技术，也积累了丰富的性能优化和问题排查经验。希望这篇总结能帮助到其他开发者，也欢迎大家提出宝贵的建议和意见！</p>
+
+  </div>
+  <div>
+    
+  </div>
+</article>
+<div class="nav">
+  
+  
+    <div class="nav-item-next">
+      <a 
+        href="/2025/10/29/002/" 
+        class="nav-link">
+        <div>
+          <div class="nav-label">下一篇</div>
+          
+            <div class="nav-title">关于嵌入式开发 </div>
+          
+        </div>
+        <i class="iconfont icon-right nav-next-icon"></i>
+      </a>
+    </div>
+  
+</div>
+
+<div 
+  class="card card-content toc-card" 
+  id="mobiletoc">
+  <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%8A%E7%BA%BF%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5"><span class="toc-text">贪吃蛇小游戏开发总结：从零到上线的技术实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%BB%E8%A6%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">开发过程中遇到的主要问题及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%91%87%E6%9D%86%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">1. 摇杆控制系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Canvas-%E7%BB%98%E5%88%B6%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="toc-text">2. Canvas 绘制显示问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A3%9F%E7%89%A9%E7%94%9F%E6%88%90%E9%80%BB%E8%BE%91%E9%97%AE%E9%A2%98"><span class="toc-text">3. 食物生成逻辑问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-1"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%81%E8%AE%B8%E9%A3%9F%E7%89%A9%E5%87%BA%E7%8E%B0%E5%9C%A8%E8%9B%87%E8%BA%AB%E4%B8%8A"><span class="toc-text">4. 允许食物出现在蛇身上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-3"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9-1"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A9%BF%E5%A2%99%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">5. 穿墙功能的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-4"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">6. 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-5"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-5"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B"><span class="toc-text">7. 代码质量改进</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-6"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6"><span class="toc-text">解决方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E6%80%BB%E7%BB%93"><span class="toc-text">技术栈总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9"><span class="toc-text">项目亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-text">经验总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="toc-text">后续优化方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-text">项目地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol></li></ol>
+</div>
+
+            </main>
+            <aside class="right-column">
+              <div class="sticky-widescreen">
+  
+  
+    <article class="card card-content toc-card">
+      <div class="toc-header">
+  <i 
+    class="iconfont icon-menu" 
+    style="padding-right: 2px;">
+  </i>目录
+</div>
+<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%AA%E5%90%83%E8%9B%87%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93%EF%BC%9A%E4%BB%8E%E9%9B%B6%E5%88%B0%E4%B8%8A%E7%BA%BF%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AE%9E%E8%B7%B5"><span class="toc-text">贪吃蛇小游戏开发总结：从零到上线的技术实践</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%BB%E8%A6%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">开发过程中遇到的主要问题及解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%91%87%E6%9D%86%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">1. 摇杆控制系统的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Canvas-%E7%BB%98%E5%88%B6%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98"><span class="toc-text">2. Canvas 绘制显示问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-1"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%A3%9F%E7%89%A9%E7%94%9F%E6%88%90%E9%80%BB%E8%BE%91%E9%97%AE%E9%A2%98"><span class="toc-text">3. 食物生成逻辑问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-2"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90-1"><span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%85%81%E8%AE%B8%E9%A3%9F%E7%89%A9%E5%87%BA%E7%8E%B0%E5%9C%A8%E8%9B%87%E8%BA%AB%E4%B8%8A"><span class="toc-text">4. 允许食物出现在蛇身上</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-3"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9-1"><span class="toc-text">技术难点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-3"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%A9%BF%E5%A2%99%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">5. 穿墙功能的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-4"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-4"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">6. 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-5"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-5"><span class="toc-text">解决方案</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E6%94%B9%E8%BF%9B"><span class="toc-text">7. 代码质量改进</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0-6"><span class="toc-text">问题描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-6"><span class="toc-text">解决方案</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E6%80%BB%E7%BB%93"><span class="toc-text">技术栈总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BA%AE%E7%82%B9"><span class="toc-text">项目亮点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="toc-text">经验总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E4%BC%98%E5%8C%96%E6%96%B9%E5%90%91"><span class="toc-text">后续优化方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80"><span class="toc-text">项目地址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-text">结语</span></a></li></ol></li></ol>
+    </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header">
+    <i 
+      class="iconfont icon-wenzhang_huaban" 
+      style="padding-right: 2px;">
+    </i>最近文章
+  </div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2026-01-12</div>
+        <a href="/2026/01/12/003/"><div class="recent-posts-item-content">贪吃蛇小游戏</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2025-10-29</div>
+        <a href="/2025/10/29/002/"><div class="recent-posts-item-content">关于嵌入式开发</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-12-19</div>
+        <a href="/2022/12/19/001/"><div class="recent-posts-item-content">关于markdown的基础语法</div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+     
+    <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>
+          Copyright ©
+          
+            2020
+          
+          
+                - 
+                2026
+          
+        </span>
+        &nbsp;
+        <a 
+          href="/" 
+          class="footer-link">
+          xww的个人博客
+        </a>
+      </div>
+    </div>
+
+    
+      <div class="footer-dsc">
+        
+          Powered by
+          <a 
+            href="https://hexo.io/" 
+            class="footer-link" 
+            target="_blank" 
+            rel="nofollow noopener noreferrer">
+            &nbsp;Hexo
+          </a>
+        
+        
+          <span>&nbsp;|&nbsp;</span>
+        
+        
+          Theme -
+          <a 
+            href="https://github.com/theme-kaze" 
+            class="footer-link" 
+            target="_blank"
+            rel="nofollow noopener noreferrer">
+            &nbsp;Kaze
+          </a>
+        
+      </div>
+    
+    
+    
+    
+</footer>
+ 
+    
+  <a 
+    role="button" 
+    id="scrollbutton" 
+    class="basebutton" 
+    aria-label="回到顶部">
+    <i class="iconfont icon-arrowleft button-icon"></i>
+  </a>
+
+<a 
+  role="button" 
+  id="menubutton"
+  aria-label="menu button"
+  class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="popbutton" 
+  class="basebutton" 
+  aria-label="控制中心">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="darkbutton" 
+  class="basebutton darkwidget" 
+  aria-label="夜色模式">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+<a 
+  role="button" 
+  id="searchbutton" 
+  class="basebutton searchwidget" 
+  aria-label="搜索">
+  <i class="iconfont icon-search button-icon"></i>
+</a> 
+     
+     
+     
+      <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img')
+    var i
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a')
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'))
+      wrapper.setAttribute('aria-label', 'illustration')
+      wrapper.style.cssText =
+        'width: 100%; display: flex; justify-content: center;'
+      if (img[i].alt) wrapper.dataset.caption = img[i].alt
+      wrapper.dataset.nolink = true
+      img[i].before(wrapper)
+      wrapper.append(img[i])
+      var divWrap = document.createElement('div')
+      divWrap.classList.add('gallery')
+      wrapper.before(divWrap)
+      divWrap.append(wrapper)
+    }
+    baguetteBox.run('.gallery')
+  }
+</script>
+<script>
+  loadScript(
+    "/js/lib/lightbox/baguetteBox.min.js",
+    addImgLayout
+  )
+</script>
+ 
+     
+     
+    <script src="/js/main.js"></script> 
+     
+    
+      <script>
+        var addLazyload = function () {
+          var observer = lozad('.lozad', {
+            load: function (el) {
+              el.srcset = el.getAttribute('data-src')
+            },
+            loaded: function (el) {
+              el.classList.add('loaded')
+            },
+          })
+          observer.observe()
+        }
+      </script>
+      <script>
+        loadScript('/js/lib/lozad.min.js', addLazyload)
+      </script>
+    
+    <script src="//instant.page/5.1.0" type="module"
+      integrity="sha384-by67kQnR+pyfy8yWP4kPO12fHKRLHZPfEsiSXR8u2IKcTdxD805MGUXBzVPnkLHw"></script>
+    
+    
+  </body>
+</html>
