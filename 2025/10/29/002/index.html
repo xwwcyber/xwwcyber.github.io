@@ -384,12 +384,6 @@
   <div class="tags-list">
     
       <a 
-        href="/tags/github/" 
-        title="github">
-        <div class="tags-list-item">github</div>
-      </a>
-    
-      <a 
         href="/tags/Claude/" 
         title="Claude">
         <div class="tags-list-item">Claude</div>
@@ -399,6 +393,12 @@
         href="/tags/AI/" 
         title="AI">
         <div class="tags-list-item">AI</div>
+      </a>
+    
+      <a 
+        href="/tags/github/" 
+        title="github">
+        <div class="tags-list-item">github</div>
       </a>
     
       <a 
@@ -524,7 +524,7 @@
 <li><strong>Controller&#x2F;Model (逻辑层)</strong>: <code>VLCkits</code> 封装了 <code>libvlc</code> 的 C 语言接口，负责管理 VLC 实例生命周期、媒体加载及播放状态控制。</li>
 </ul>
 <h2 id="4-关键技术实现"><a href="#4-关键技术实现" class="headerlink" title="4. 关键技术实现"></a>4. 关键技术实现</h2><h3 id="4-1-自定义无边框窗口"><a href="#4-1-自定义无边框窗口" class="headerlink" title="4.1 自定义无边框窗口"></a>4.1 自定义无边框窗口</h3><p>简单的 <code>Qt::FramelessWindowHint</code> 会导致窗口无法通过拖动边缘来改变大小。</p>
-<p>所以我自定义了一个CFramelessWidget (无边框基类)，它通过重写 <code>nativeEvent</code> 函数并捕获 Windows 的 <code>WM_NCHITTEST</code> 消息，手动实现了窗口的拉伸（左、右、上、下及四个角）和客户区判断。这个类定义了 m_nBorderWidth &#x3D; 5 作为感应边距。如果鼠标落在边缘 5 像素内，则告诉系统这是边缘，从而触发缩放光标。</p>
+<p>所以我自定义了一个<code>CFramelessWidget</code> (无边框基类)，它通过重写 <code>nativeEvent</code> 函数并捕获 Windows 的 <code>WM_NCHITTEST</code> 消息，手动实现了窗口的拉伸（左、右、上、下及四个角）和客户区判断。这个类定义了 m_nBorderWidth &#x3D; 5 作为感应边距。如果鼠标落在边缘 5 像素内，则告诉系统这是边缘，从而触发缩放光标。</p>
 <pre class="highlight"><code class="hljs C++"><span class="hljs-comment">// 代码片段：cframelesswidget.cpp</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">CFramelessWidget::nativeEvent</span><span class="hljs-params">(<span class="hljs-type">const</span> QByteArray &amp;eventType, <span class="hljs-type">void</span> *message, <span class="hljs-type">long</span> *result)</span></span><br><span class="hljs-function"></span>&#123;<br>    MSG * param = <span class="hljs-built_in">static_cast</span>&lt;MSG*&gt;(message);<br><br>    <span class="hljs-keyword">switch</span> (param-&gt;message)<br>    &#123;<br>    <span class="hljs-keyword">case</span> WM_NCHITTEST:<br>    &#123;<br>        <span class="hljs-comment">// 获取鼠标绝对坐标并映射到窗口坐标</span><br>        <span class="hljs-function">QPoint <span class="hljs-title">globalPos</span><span class="hljs-params">(GET_X_LPARAM(param-&gt;lParam), GET_Y_LPARAM(param-&gt;lParam))</span></span>;<br>        QPoint localPos = <span class="hljs-built_in">mapFromGlobal</span>(globalPos);<br>        <span class="hljs-type">int</span> nX = localPos.<span class="hljs-built_in">x</span>();<br>        <span class="hljs-type">int</span> nY = localPos.<span class="hljs-built_in">y</span>();<br><br>        <span class="hljs-comment">// 判断鼠标是否在边框区域 (m_nBorderWidth = 5)</span><br>        <span class="hljs-keyword">if</span>((nX &gt; <span class="hljs-number">0</span>) &amp;&amp; (nX &lt; m_nBorderWidth))&#123;<br>            *result = HTLEFT; <span class="hljs-comment">// 告诉系统鼠标在左边界</span><br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>((nX &gt; <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">width</span>() - m_nBorderWidth) &amp;&amp; (nX &lt; <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">width</span>()))&#123;<br>            *result = HTRIGHT;<br>        &#125;<br>        <span class="hljs-comment">// ... (省略上下边界和其他角落的判断) ...</span><br>        <span class="hljs-keyword">else</span> &#123;<br>            *result = HTCLIENT; <span class="hljs-comment">// 客户区</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> QWidget::<span class="hljs-built_in">nativeEvent</span>(eventType, message, result);<br></code></pre>
 
 <h3 id="4-2-libVLC-的集成与窗口绑定"><a href="#4-2-libVLC-的集成与窗口绑定" class="headerlink" title="4.2 libVLC 的集成与窗口绑定"></a>4.2 libVLC 的集成与窗口绑定</h3><p>项目底层使用 VLC 强大的解码能力。在<code>VLCkits</code>类中，最关键的一步是将 VLC 的渲染输出绑定到 Qt 的<code>QWidget</code>上。这需要使用<code>libvlc_media_player_set_hwnd</code>函数并将 Qt 控件的<code>winId()</code> 传入。</p>
@@ -548,6 +548,7 @@
 <p>未来计划：</p>
 <ul>
 <li>增加网络流媒体播放支持 (RTMP&#x2F;RTSP)。</li>
+<li>点击进度条到达视频某一播放位置。</li>
 <li>添加字幕挂载功能。</li>
 <li>优化高分屏 (High DPI) 下的显示效果。</li>
 </ul>
