@@ -21,7 +21,7 @@ menus:
 about:
   description: 描述
   social_links:
-    - { icon: icon-github, link: https://github.com/shuangxunian }
+    - { icon: icon-github, link: https://github.com/xwwcyber }
 
 #------------------------
 # Links
