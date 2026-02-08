@@ -541,6 +541,7 @@
 <pre class="highlight"><code class="hljs bash">git branch -d feat/login-page<br><br></code></pre>
 
 
+<hr>
 <h3 id="场景二：解决代码冲突（必须掌握）"><a href="#场景二：解决代码冲突（必须掌握）" class="headerlink" title="场景二：解决代码冲突（必须掌握）"></a>场景二：解决代码冲突（必须掌握）</h3><p>这是新手最怕的环节。假设你和同事都修改了 <code>README.md</code> 的同一行，合并时 Git 会报错：<code>CONFLICT (content): Merge conflict in README.md</code>。</p>
 <h4 id="1-发现冲突"><a href="#1-发现冲突" class="headerlink" title="1. 发现冲突"></a>1. 发现冲突</h4><p>当你执行 <code>git merge</code> 后，终端提示 Conflict，此时 Git 会暂停合并过程。</p>
 <h4 id="2-打开文件手动修复"><a href="#2-打开文件手动修复" class="headerlink" title="2. 打开文件手动修复"></a>2. 打开文件手动修复</h4><p>用代码编辑器（VS Code 等）打开冲突的文件 <code>README.md</code>。你会看到类似这样的标记：</p>
@@ -558,6 +559,7 @@
 <pre class="highlight"><code class="hljs bash">git add README.md    <span class="hljs-comment"># 标记该文件冲突已解决</span><br>git commit           <span class="hljs-comment"># 不需要写 -m，Git 会自动生成一个&quot;Merge branch...&quot;的提交信息</span><br><br></code></pre>
 
 <p><em>此时，合并完成。</em></p>
+<hr>
 <h3 id="场景三：将本地分支推送到远程（GitHub-x2F-GitLab）"><a href="#场景三：将本地分支推送到远程（GitHub-x2F-GitLab）" class="headerlink" title="场景三：将本地分支推送到远程（GitHub&#x2F;GitLab）"></a>场景三：将本地分支推送到远程（GitHub&#x2F;GitLab）</h3><p>当你第一次在本地创建了分支，远程仓库（GitHub）是不知道的。你需要把它“推”上去。</p>
 <pre class="highlight"><code class="hljs bash"><span class="hljs-comment"># 假设你还在 feat/login-page 分支上</span><br>git push -u origin feat/login-page<br><br></code></pre>
 
