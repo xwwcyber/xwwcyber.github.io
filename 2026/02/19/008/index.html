@@ -38,7 +38,7 @@
     
       <meta 
         property="og:img" 
-        content="MySQL的基础语法">
+        content="MySQL基础语法及常用命令备忘录">
     
     
       <meta 
@@ -58,6 +58,10 @@
           <meta 
             property="og:article:tag" 
             content="MySQL">
+        
+          <meta 
+            property="og:article:tag" 
+            content="数据库">
         
       
     
@@ -301,7 +305,7 @@
   <a 
     class="author-tags-count" 
     href="/tags">
-    <span>10</span>
+    <span>11</span>
     <span>标签</span>
   </a>
 </div>
@@ -328,7 +332,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%99%BB%E5%BD%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-Database-Operations"><span class="toc-text">一、 登录与数据库操作 (Database Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C-Table-Operations"><span class="toc-text">二、 数据表操作 (Table Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%AD%97%E6%AE%B5%E6%93%8D%E4%BD%9C-Column-Operations"><span class="toc-text">三、 字段操作 (Column Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5-Data-Operations"><span class="toc-text">四、 数据操作 - 增删改查 (Data Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E4%B8%BB%E9%94%AE%E4%B8%8E%E7%BA%A6%E6%9D%9F-Keys-amp-Constraints"><span class="toc-text">五、 主键与约束 (Keys &amp; Constraints)</span></a></li></ol>
       </div>
     </article>
   
@@ -384,15 +388,9 @@
       </a>
     
       <a 
-        href="/tags/libVLC/" 
-        title="libVLC">
-        <div class="tags-list-item">libVLC</div>
-      </a>
-    
-      <a 
-        href="/tags/Qt/" 
-        title="Qt">
-        <div class="tags-list-item">Qt</div>
+        href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+        title="数据库">
+        <div class="tags-list-item">数据库</div>
       </a>
     
       <a 
@@ -423,6 +421,18 @@
         href="/tags/AI/" 
         title="AI">
         <div class="tags-list-item">AI</div>
+      </a>
+    
+      <a 
+        href="/tags/libVLC/" 
+        title="libVLC">
+        <div class="tags-list-item">libVLC</div>
+      </a>
+    
+      <a 
+        href="/tags/Qt/" 
+        title="Qt">
+        <div class="tags-list-item">Qt</div>
       </a>
     
       <a 
@@ -471,7 +481,7 @@
     
     
       <span class="dot"></span>
-      <span>309 字</span>
+      <span>651 字</span>
     
   </div>
   
@@ -491,6 +501,15 @@
             MySQL
           </a>
         
+          
+            <span class="dot"></span>
+          
+          <a 
+            href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" 
+            class="post-meta-link">
+            数据库
+          </a>
+        
       </div>
     </div>
   
@@ -498,31 +517,54 @@
   <div 
     id="section" 
     class="post-content">
-    <p><strong>mysql -uroot -p 登录数据库</strong></p>
-<p>show databases;查看数据库</p>
-<p>create database Dname;创建数据库</p>
-<p>drop database Dname;删除数据库</p>
-<p>show create database Dname;</p>
-<p>alter database Dname defalut character set CharacterSetName;修改数据库</p>
-<p>use Dname;使用数据库</p>
-<p>show tables；查看一个数据库中有多少张表</p>
-<p>create table Tname；创建表</p>
-<p>show create table Tname;&#x2F;desc Tname；查看表</p>
-<p>alter table Tname;删除表</p>
-<p>Alter table tName add field datatype；添加列(字段)</p>
-<p>alter table tName change oldfield  newfield datatype；对字段名进行修改</p>
-<p>Alter table tName modify field newDataType;对字段名的数据类型【约束】进行修改</p>
-<p>alter table Tname drop tname;删除表中数据</p>
-<p>insert into Tname values（）；添加表中数据</p>
-<p>update Tname set tname&#x3D;newname where ….;更新数据</p>
-<p>create table newTname like Tname；复制表结构，不复制表的数据</p>
-<p>create table newTname select *from Tname；复制表结构和表的数据</p>
-<p>delete from Tname where……;删除符合条件的数据（只删除数据，不删除表结构）</p>
-<p>truncate Tname；删除表中所有数据；</p>
-<p>alter table Tname add primary key（tname）；单个主键</p>
-<p>alter table Tname add primary key（tname1，tname2）；联合主键，需要两个完全相同才算重复</p>
-<p>alter table Tname modify tname type auto_increment；设置自动增加</p>
-<p>alter table Tname modify tname type；</p>
+    <p>在日常的后端开发或数据处理工作中，熟练掌握 MySQL 的基础语法是必不可少的。本文为你整理了一份涵盖数据库、数据表、字段以及数据增删改查的基础命令速查表（Cheat Sheet），方便随时翻阅。</p>
+<h3 id="一、-登录与数据库操作-Database-Operations"><a href="#一、-登录与数据库操作-Database-Operations" class="headerlink" title="一、 登录与数据库操作 (Database Operations)"></a>一、 登录与数据库操作 (Database Operations)</h3><p>首先，我们需要进入 MySQL 环境并对数据库进行管理：</p>
+<ul>
+<li><strong>登录数据库</strong>  <pre class="highlight"><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br></code></pre></li>
+<li><strong>查看所有数据库</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SHOW</span> DATABASES;<br></code></pre></li>
+<li><strong>创建数据库</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">CREATE</span> DATABASE db_name;<br></code></pre></li>
+<li><strong>删除数据库</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">DROP</span> DATABASE db_name;<br></code></pre></li>
+<li><strong>查看数据库的创建信息</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> DATABASE db_name;<br></code></pre></li>
+<li><strong>修改数据库字符集</strong> (推荐使用 <code>utf8mb4</code>)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> DATABASE db_name <span class="hljs-keyword">DEFAULT</span> <span class="hljs-type">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8mb4;<br></code></pre></li>
+<li><strong>切换&#x2F;使用数据库</strong>  <pre class="highlight"><code class="hljs sql">USE db_name;<br></code></pre></li>
+</ul>
+<hr>
+<h3 id="二、-数据表操作-Table-Operations"><a href="#二、-数据表操作-Table-Operations" class="headerlink" title="二、 数据表操作 (Table Operations)"></a>二、 数据表操作 (Table Operations)</h3><p>进入具体的数据库后，就可以开始对表结构进行操作了：</p>
+<ul>
+<li><strong>查看当前数据库中的所有表</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SHOW</span> TABLES;<br></code></pre></li>
+<li><strong>创建数据表</strong> (需包含至少一个字段)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> table_name (<br>    id <span class="hljs-type">INT</span>,<br>    name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>)<br>);<br></code></pre></li>
+<li><strong>查看表结构</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">DESC</span> table_name;<br><span class="hljs-comment">-- 或者使用详细结构查看：</span><br><span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> table_name;<br></code></pre></li>
+<li><strong>删除数据表</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> table_name;<br></code></pre></li>
+<li><strong>复制表结构</strong> (仅复制结构，不包含数据)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> new_table_name <span class="hljs-keyword">LIKE</span> old_table_name;<br></code></pre></li>
+<li><strong>复制表结构及数据</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> new_table_name <span class="hljs-keyword">AS</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> old_table_name;<br></code></pre></li>
+</ul>
+<hr>
+<h3 id="三、-字段操作-Column-Operations"><a href="#三、-字段操作-Column-Operations" class="headerlink" title="三、 字段操作 (Column Operations)"></a>三、 字段操作 (Column Operations)</h3><p>当表创建好后，如果需要调整表内的列（字段），可以使用 <code>ALTER TABLE</code> 命令：</p>
+<ul>
+<li><strong>添加新字段</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">ADD</span> column_name datatype;<br></code></pre></li>
+<li><strong>修改字段数据类型或约束</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name MODIFY column_name new_datatype;<br></code></pre></li>
+<li><strong>修改字段名称及数据类型</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name CHANGE old_column_name new_column_name datatype;<br></code></pre></li>
+<li><strong>删除字段</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> column_name;<br></code></pre></li>
+</ul>
+<hr>
+<h3 id="四、-数据操作-增删改查-Data-Operations"><a href="#四、-数据操作-增删改查-Data-Operations" class="headerlink" title="四、 数据操作 - 增删改查 (Data Operations)"></a>四、 数据操作 - 增删改查 (Data Operations)</h3><ul>
+<li><strong>插入数据</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> table_name (column1, column2) <span class="hljs-keyword">VALUES</span> (value1, value2);<br></code></pre></li>
+<li><strong>更新数据</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">UPDATE</span> table_name <span class="hljs-keyword">SET</span> column1 <span class="hljs-operator">=</span> new_value <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">condition</span>;<br></code></pre></li>
+<li><strong>删除符合条件的数据</strong> (只删数据，保留表结构)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> table_name <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">condition</span>;<br></code></pre></li>
+<li><strong>清空表中所有数据</strong> (重置表，速度比 DELETE 快)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">TRUNCATE</span> <span class="hljs-keyword">TABLE</span> table_name;<br></code></pre></li>
+</ul>
+<hr>
+<h3 id="五、-主键与约束-Keys-amp-Constraints"><a href="#五、-主键与约束-Keys-amp-Constraints" class="headerlink" title="五、 主键与约束 (Keys &amp; Constraints)"></a>五、 主键与约束 (Keys &amp; Constraints)</h3><p>合理的约束能保证数据的完整性：</p>
+<ul>
+<li><strong>添加单个主键</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY (column_name);<br></code></pre></li>
+<li><strong>添加联合主键</strong> (两个字段组合在一起完全相同才算重复)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">PRIMARY</span> KEY (column_name1, column_name2);<br></code></pre></li>
+<li><strong>删除主键</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">PRIMARY</span> KEY;<br></code></pre></li>
+<li><strong>设置主键自动增长</strong> (通常用于 INT 类型主键)  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name MODIFY column_name <span class="hljs-type">INT</span> AUTO_INCREMENT;<br></code></pre></li>
+<li><strong>设置字段默认值</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name MODIFY column_name datatype <span class="hljs-keyword">DEFAULT</span> default_value;<br></code></pre></li>
+</ul>
+<blockquote>
+<p><strong>小贴士</strong>：在执行 <code>UPDATE</code> 和 <code>DELETE</code> 操作时，千万别忘了加上 <code>WHERE</code> 条件，否则会修改或删除整张表的数据哦！</p>
+</blockquote>
 <p>alter table Tname drop primary key；</p>
 <p>alter table Tname modify tname type default ….;设置默认值</p>
 
@@ -573,7 +615,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%99%BB%E5%BD%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-Database-Operations"><span class="toc-text">一、 登录与数据库操作 (Database Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C-Table-Operations"><span class="toc-text">二、 数据表操作 (Table Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%AD%97%E6%AE%B5%E6%93%8D%E4%BD%9C-Column-Operations"><span class="toc-text">三、 字段操作 (Column Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5-Data-Operations"><span class="toc-text">四、 数据操作 - 增删改查 (Data Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E4%B8%BB%E9%94%AE%E4%B8%8E%E7%BA%A6%E6%9D%9F-Keys-amp-Constraints"><span class="toc-text">五、 主键与约束 (Keys &amp; Constraints)</span></a></li></ol>
 </div>
 
             </main>
@@ -588,7 +630,7 @@
     style="padding-right: 2px;">
   </i>目录
 </div>
-
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%99%BB%E5%BD%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C-Database-Operations"><span class="toc-text">一、 登录与数据库操作 (Database Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E6%95%B0%E6%8D%AE%E8%A1%A8%E6%93%8D%E4%BD%9C-Table-Operations"><span class="toc-text">二、 数据表操作 (Table Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%AD%97%E6%AE%B5%E6%93%8D%E4%BD%9C-Column-Operations"><span class="toc-text">三、 字段操作 (Column Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C-%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5-Data-Operations"><span class="toc-text">四、 数据操作 - 增删改查 (Data Operations)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E4%B8%BB%E9%94%AE%E4%B8%8E%E7%BA%A6%E6%9D%9F-Keys-amp-Constraints"><span class="toc-text">五、 主键与约束 (Keys &amp; Constraints)</span></a></li></ol>
     </article>
   
   
