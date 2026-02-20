@@ -28,7 +28,7 @@
     
       <meta 
         property="og:url" 
-        content="http://example.com/2026/02/19/008/index.html">
+        content="http://example.com/2026/02/20/008/index.html">
     
     
       <meta 
@@ -46,10 +46,10 @@
         content="article">
       <meta 
         property="og:article:published_time" 
-        content="2026-02-19">
+        content="2026-02-20">
       <meta 
         property="og:article:modified_time" 
-        content="2026-02-19">
+        content="2026-02-20">
       <meta 
         property="og:article:author" 
         content="xww">
@@ -462,12 +462,12 @@
     </div>
   
   <div class="post-meta post-show-meta">
-    <time datetime="2026-02-19T00:00:00.000Z">
+    <time datetime="2026-02-20T00:00:00.000Z">
       <i 
         class="iconfont icon-calendar" 
         style="margin-right: 2px;">
       </i>
-      <span>2026-02-19</span>
+      <span>2026-02-20</span>
     </time>
     
       <span class="dot"></span>
@@ -481,7 +481,7 @@
     
     
       <span class="dot"></span>
-      <span>1.3k 字</span>
+      <span>1.2k 字</span>
     
   </div>
   
@@ -597,8 +597,7 @@
 <ul>
 <li><strong>语法</strong>: <code>LIMIT 偏移量, 查询记录数</code>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> table_name LIMIT <span class="hljs-number">0</span>, <span class="hljs-number">10</span>; <span class="hljs-comment">-- 查询第 1 到 10 条数据</span><br><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> table_name LIMIT <span class="hljs-number">10</span>, <span class="hljs-number">10</span>; <span class="hljs-comment">-- 查询第 11 到 20 条数据</span><br></code></pre></li>
 </ul>
-<h4 id="7-多表连接查询-JOIN"><a href="#7-多表连接查询-JOIN" class="headerlink" title="7. 多表连接查询 (JOIN)"></a>7. 多表连接查询 (JOIN)</h4><p>[Image of SQL joins Venn diagram]</p>
-<p>在实际业务中，数据往往分散在多张表中，我们需要通过 JOIN 来联合查询：</p>
+<h4 id="7-多表连接查询-JOIN"><a href="#7-多表连接查询-JOIN" class="headerlink" title="7. 多表连接查询 (JOIN)"></a>7. 多表连接查询 (JOIN)</h4><p>在实际业务中，数据往往分散在多张表中，我们需要通过 JOIN 来联合查询：</p>
 <ul>
 <li><strong>内连接 (INNER JOIN)</strong>: 只返回两张表中互相匹配的数据。  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SELECT</span> t1.name, t2.score <br><span class="hljs-keyword">FROM</span> student t1 <br><span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> exam t2 <span class="hljs-keyword">ON</span> t1.id <span class="hljs-operator">=</span> t2.student_id;<br></code></pre></li>
 <li><strong>左外连接 (LEFT JOIN)</strong>: 返回左表的所有数据。如果右表中没有匹配项，则显示为 NULL。  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">SELECT</span> t1.name, t2.score <br><span class="hljs-keyword">FROM</span> student t1 <br><span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">JOIN</span> exam t2 <span class="hljs-keyword">ON</span> t1.id <span class="hljs-operator">=</span> t2.student_id;<br></code></pre></li>
@@ -611,29 +610,15 @@
 </article>
 <div class="nav">
   
-    <div class="nav-item-prev">
-      <a 
-        href="/2026/02/19/007/" 
-        class="nav-link">
-        <i class="iconfont icon-left nav-prev-icon"></i>
-        <div>
-          <div class="nav-label">上一篇</div>
-          
-            <div class="nav-title">忘记 MySQL 8.0 root 密码？教你如何重置密码 </div>
-          
-        </div>
-      </a>
-    </div>
-  
   
     <div class="nav-item-next">
       <a 
-        href="/2026/02/17/006/" 
+        href="/2026/02/19/007/" 
         class="nav-link">
         <div>
           <div class="nav-label">下一篇</div>
           
-            <div class="nav-title">手把手教你提交第一个 GitHub PR--为 tinyserial 项目修复 Bug </div>
+            <div class="nav-title">忘记 MySQL 8.0 root 密码？教你如何重置密码 </div>
           
         </div>
         <i class="iconfont icon-right nav-next-icon"></i>
@@ -681,13 +666,13 @@
   <div class="recent-posts-list">
     
       <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2026-02-19</div>
-        <a href="/2026/02/19/007/"><div class="recent-posts-item-content">忘记 MySQL 8.0 root 密码？教你如何重置密码</div></a>
+        <div class="recent-posts-item-title">2026-02-20</div>
+        <a href="/2026/02/20/008/"><div class="recent-posts-item-content">关于MySQL的基础语法</div></a>
       </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2026-02-19</div>
-        <a href="/2026/02/19/008/"><div class="recent-posts-item-content">关于MySQL的基础语法</div></a>
+        <a href="/2026/02/19/007/"><div class="recent-posts-item-content">忘记 MySQL 8.0 root 密码？教你如何重置密码</div></a>
       </div>
     
       <div class="recent-posts-item">
