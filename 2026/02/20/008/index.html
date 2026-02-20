@@ -518,6 +518,9 @@
     id="section" 
     class="post-content">
     <p>在日常的后端开发或数据处理工作中，熟练掌握 MySQL 的基础语法是必不可少的。本文为你整理了一份涵盖数据库、数据表、字段以及数据增删改查的基础命令速查表（Cheat Sheet），方便随时翻阅。</p>
+<blockquote>
+<p>命令大小写都可以，不影响作用</p>
+</blockquote>
 <h3 id="一、-登录与数据库操作-Database-Operations"><a href="#一、-登录与数据库操作-Database-Operations" class="headerlink" title="一、 登录与数据库操作 (Database Operations)"></a>一、 登录与数据库操作 (Database Operations)</h3><p>首先，我们需要进入 MySQL 环境并对数据库进行管理：</p>
 <ul>
 <li><strong>登录数据库</strong>  <pre class="highlight"><code class="hljs sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p<br></code></pre></li>
@@ -568,7 +571,7 @@
 <li><strong>设置字段默认值</strong>  <pre class="highlight"><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> table_name MODIFY column_name datatype <span class="hljs-keyword">DEFAULT</span> default_value;<br></code></pre></li>
 </ul>
 <blockquote>
-<p><strong>小贴士</strong>：在执行 <code>UPDATE</code> 和 <code>DELETE</code> 操作时，千万别忘了加上 <code>WHERE</code> 条件，否则会修改或删除整张表的数据哦！</p>
+<p><strong>注</strong>：在执行 <code>UPDATE</code> 和 <code>DELETE</code> 操作时，千万别忘了加上 <code>WHERE</code> 条件，否则会修改或删除整张表的数据哦！</p>
 </blockquote>
 <h3 id="六、-数据查询-Data-Query-Language-DQL"><a href="#六、-数据查询-Data-Query-Language-DQL" class="headerlink" title="六、 数据查询 (Data Query Language - DQL)"></a>六、 数据查询 (Data Query Language - DQL)</h3><p>查询是数据库操作的重中之重。下面整理了从基础到进阶的 <code>SELECT</code> 查询语法：</p>
 <h4 id="1-基础查询"><a href="#1-基础查询" class="headerlink" title="1. 基础查询"></a>1. 基础查询</h4><ul>
