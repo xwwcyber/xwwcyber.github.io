@@ -105,8 +105,8 @@ scrollUpAnimation: true
 # comment config
 #------------------------
 comment:
-  enable: false
-  type: valine # valine | gitalk | livere | disqus | we recommend valine | waline
+  enable: true
+  type: gitalk # valine | gitalk | livere | disqus | we recommend valine | waline
   # gitalk config details can see in https://github.com/gitalk/gitalk/blob/master/readme-cn.md
   # waline config details can see in https://waline.js.org
   valine:
@@ -126,15 +126,16 @@ comment:
     enableQQ: false
     requiredFields: []
   gitalk:
-    clientID:
-    clientSecret:
-    repo:
-    owner:
-    admin:
-    id: location.href
+    clientID: Ov23liPO3SVybUfFfbcH
+    clientSecret: 22ed759f4b78629a93e8591c93ea2f210e86d3b9
+    repo: blog-comments
+    owner: xwwcyber
+    admin: [xwwcyber]
+    id: location.pathname
     distractionFreeMode: false
     # en | zh-CN | zh-TW
-    language: navigator.language || navigator.userLanguage
+    # language: navigator.language || navigator.userLanguage
+    language: zh-CN
     labels: ['Gitalk']
     perPage: 10
   livere:
